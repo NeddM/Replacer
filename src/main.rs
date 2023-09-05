@@ -23,12 +23,16 @@ fn scan_variables(file: String) -> HashMap<String, String> {
     vars
 }
 
-fn scan_matches(old_file: String, vars: HashMap<String, String>) {
-    let mut new_file = fs::File::create("newworkflow.yaml");
+fn scan_matches(old_file: String, vars: HashMap<String, String>) -> String {
+    fs::File::create("newworkflow.yaml").unwrap();
     let mut old_file = fs::read_to_string("workflow.yaml").unwrap();
+    let mut new_file = fs::read_to_string("newworkflow.yaml").unwrap();
 
     for line in old_file.lines() {
-        fs::write(new_file, line);
+        println!("{}", line);
+        fs::write(&mut new_file, line);
     }
-    Ok(())
+    println!("{}", new_file);
+    let hola = String::from("hola");
+    hola
 }
