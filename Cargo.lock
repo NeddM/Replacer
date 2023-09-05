@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "ghreplacer"
+name = "process_files"
 version = "0.1.0"

@@ -1,23 +1,34 @@
-use std::{
-    fs::File,
-    io::{BufRead, BufReader},
-};
+use std::collections::HashMap;
+use std::{fs, string};
 
 fn main() {
-    let variables = "hola.txt";
-    let workflow = "hola.txt";
+    let vars_file: String = String::from("variables.txt");
+    let vars = scan_variables(vars_file);
 
-    read_file_line_by_line(variables);
-    read_file_line_by_line(workflow);
+    let old_workflow = String::from("workflow.yaml");
+    let new_workflow = scan_matches(old_workflow, vars);
+    println!("{}", new_workflow);
 }
 
-fn read_file_line_by_line(filepath: &str) -> Result<(), Box<dyn std::error::Error>> {
-    let file = File::open(filepath)?;
-    let reader = BufReader::new(file);
+fn scan_variables(file: String) -> HashMap<String, String> {
+    let mut vars: HashMap<String, String> = HashMap::new();
+    let binding = fs::read_to_string(file).unwrap();
 
-    for line in reader.lines() {
-        println!("{}", line?);
+    for line in binding.lines() {
+        let temp_line: Vec<&str> = line.split(':').collect();
+        let key = temp_line[0].trim().to_string();
+        let value = temp_line[0].trim().to_string();
+        vars.insert(key, value);
     }
+    vars
+}
 
+fn scan_matches(old_file: String, vars: HashMap<String, String>) {
+    let mut new_file = fs::File::create("newworkflow.yaml");
+    let mut old_file = fs::read_to_string("workflow.yaml").unwrap();
+
+    for line in old_file.lines() {
+        fs::write(new_file, line);
+    }
     Ok(())
 }
