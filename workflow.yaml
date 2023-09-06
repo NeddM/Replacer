@@ -51,17 +51,17 @@ jobs:
             - name: Login action
               uses: docker/login-action@v2
               with:
-                  username: ${{ secrets.DOCKER_USER }}
-                  password: ${{ secrets.DOCKER_PASSWORD }}
+                  username: ${{ secrets.__DOCKER_USER__ }}
+                  password: ${{ secrets.__DOCKER_PASSWORD__ }}
 
             - name: Building
-              run: docker build -t ${{ secrets.DOCKER_USER }}/bolsabot:${{ needs.setup_tag.outputs.docker_tag }} -t ${{ secrets.DOCKER_USER}}/bolsabot:latest .
+              run: docker build -t ${{ secrets.__DOCKER_USER__ }}/bolsabot:${{ needs.setup_tag.outputs.docker_tag }} -t ${{ secrets.DOCKER_USER}}/bolsabot:latest .
 
             - name: Pushing SHA tag
-              run: docker push ${{ secrets.DOCKER_USER }}/bolsabot:${{ needs.setup_tag.outputs.docker_tag }}
+              run: docker push ${{ secrets.__DOCKER_USER__ }}/bolsabot:${{ needs.setup_tag.outputs.docker_tag }}
 
             - name: Pushing latest tag
-              run: docker push ${{ secrets.DOCKER_USER }}/bolsabot:latest
+              run: docker push ${{ secrets.__DOCKER_USER__ }}/bolsabot:latest
 
     running_app:
         name: Running app
@@ -79,8 +79,8 @@ jobs:
             - name: Login action
               uses: docker/login-action@v2
               with:
-                  username: ${{ secrets.DOCKER_USER }}
-                  password: ${{ secrets.DOCKER_PASSWORD }}
+                  username: ${{ secrets.__DOCKER_USER__ }}
+                  password: ${{ secrets.__DOCKER_PASSWORD__ }}
 
             - name: Running app
-              run: docker run ${{ secrets.DOCKER_USER }}/bolsabot:${{ needs.setup_tag.outputs.docker_tag }}
+              run: docker run ${{ secrets.__DOCKER_USER__ }}/bolsabot:${{ needs.setup_tag.outputs.docker_tag }}
