@@ -1,3 +1,5 @@
 Var1: hola
 Var2: que
 Var3: tal
+__DOCKER_USER__: illojuan
+__DOCKER_PASSWORD__: pablo
