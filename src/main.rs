@@ -33,7 +33,7 @@ fn main() {
         }
     };
 
-    if new_file.is_empty() {
+    if new_file.trim().is_empty() {
         new_file = String::from("export.yaml")
     }
 
