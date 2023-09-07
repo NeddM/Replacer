@@ -55,13 +55,13 @@ jobs:
                   password: ${{ secrets.__DOCKER_PASSWORD__ }}
 
             - name: Building
-              run: docker build -t ${{ secrets.__DOCKER_USER__ }}/bolsabot:${{ needs.setup_tag.outputs.docker_tag }} -t ${{ secrets.DOCKER_USER}}/bolsabot:latest .
+              run: docker build -t ${{ secrets.__DOCKER_USER__ }}/tal:${{ needs.setup_tag.outputs.docker_tag }} -t ${{ secrets.DOCKER_USER}}/tal:latest .
 
             - name: Pushing SHA tag
-              run: docker push ${{ secrets.__DOCKER_USER__ }}/bolsabot:${{ needs.setup_tag.outputs.docker_tag }}
+              run: docker push ${{ secrets.__DOCKER_USER__ }}/tal:${{ needs.setup_tag.outputs.docker_tag }}
 
             - name: Pushing latest tag
-              run: docker push ${{ secrets.__DOCKER_USER__ }}/bolsabot:latest
+              run: docker push ${{ secrets.__DOCKER_USER__ }}/tal:latest
 
     running_app:
         name: Running app
@@ -83,4 +83,4 @@ jobs:
                   password: ${{ secrets.__DOCKER_PASSWORD__ }}
 
             - name: Running app
-              run: docker run ${{ secrets.__DOCKER_USER__ }}/bolsabot:${{ needs.setup_tag.outputs.docker_tag }}
+              run: docker run ${{ secrets.__DOCKER_USER__ }}/tal:${{ needs.setup_tag.outputs.docker_tag }}
